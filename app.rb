@@ -20,18 +20,8 @@ options.each do |option, value|
   end
 end
 
-class App < Service
-  def initialize(working_dir:)
-    @working_dir = working_dir
-  end
-
-  def call
-    PresentOnTerminal.(
-      GeoLocateImages.(
-        FindImageFiles.(@working_dir)
-      )
-    )
-  end
-end
-
-App.call(working_dir: working_dir)
+PresentOnTerminal.(
+  GeoLocateImages.(
+    FindImageFiles.(working_dir)
+  )
+)
