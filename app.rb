@@ -20,17 +20,17 @@ options.each do |option, value|
   end
 end
 
-
 class App < Service
   def initialize(working_dir:)
     @working_dir = working_dir
   end
 
   def call
-    puts "Looking for images in #{@working_dir.inspect}.."
-    @image_files = FindImageFiles.(@working_dir)
-    warn "Warning: No image files found" if @image_files.empty?
-    puts GeoLocateImages.(@image_files).inspect
+    PresentOnTerminal.(
+      GeoLocateImages.(
+        FindImageFiles.(@working_dir)
+      )
+    )
   end
 end
 

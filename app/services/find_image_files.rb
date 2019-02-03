@@ -1,5 +1,7 @@
 # Service for finding image files
 class FindImageFiles < Service
+  attr_reader :directory
+
   ACCEPTED_FILE_EXTENSIONS = [
     'jpg',
     'jpeg'
@@ -10,6 +12,8 @@ class FindImageFiles < Service
   end
 
   def call
-    Dir.glob(@directory + "/**/*.{#{ACCEPTED_FILE_EXTENSIONS.join(',')}}")
+    puts "Looking for images in #{directory.inspect}.."
+
+    Dir.glob(directory + "/**/*.{#{ACCEPTED_FILE_EXTENSIONS.join(',')}}")
   end
 end
