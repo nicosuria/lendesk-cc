@@ -2,7 +2,7 @@
 class Service
   class << self
     def call(*args)
-      send(:new, args).call
+      send(:new, *args).call
     end
   end
 

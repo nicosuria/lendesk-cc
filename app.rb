@@ -1,15 +1,38 @@
-Dir[Dir.pwd + "/app/**/*.rb"].each { |f| require f  }
+# POSIX-style CLI options
+require 'getoptlong'
+require_relative 'app/service'
+Dir[Dir.pwd + "/app/**/*.rb"].each { |project_file| require project_file }
 
-class App < Service
-  def initialize(path)
-    @path = path.nil? ? Dir.pwd : path
-  end
+options = GetoptLong.new(
+  ['--dir', '-d', GetoptLong::OPTIONAL_ARGUMENT],
+)
 
-  def call
-    puts "I will operate on #{@path}"
+working_dir = Dir.pwd
+
+options.each do |option, value|
+  case option
+  when '--dir'
+    unless value == ''
+      working_dir = value
+    end
+  else
+    raise ArgumentError, "Unrecognized argument: #{option.inspect}"
   end
 end
 
 
-warn "WARNING: Ignoring other arguments : #{ARGV[1..-1].inspect}" if ARGV.length > 1
-App.call(ARGV.first)
+class App < Service
+  def initialize(working_dir:)
+    @working_dir = working_dir
+  end
+
+  def call
+    puts "Looking for images in #{@working_dir.inspect}.."
+    @image_files = FindImageFiles.(@working_dir)
+    warn "Warning: No image files found" if @image_files.empty?
+    puts @image_files.inspect
+    #@geo_location_results = GeoLocateImages.(@images)
+  end
+end
+
+App.call(working_dir: working_dir)
