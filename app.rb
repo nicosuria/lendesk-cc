@@ -30,8 +30,7 @@ class App < Service
     puts "Looking for images in #{@working_dir.inspect}.."
     @image_files = FindImageFiles.(@working_dir)
     warn "Warning: No image files found" if @image_files.empty?
-    puts @image_files.inspect
-    #@geo_location_results = GeoLocateImages.(@images)
+    puts GeoLocateImages.(@image_files).inspect
   end
 end
 
