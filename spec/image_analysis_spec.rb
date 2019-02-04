@@ -12,7 +12,7 @@ describe ImageAnalysis do
     end
 
     def call
-      @analysis.output_rows << :success
+      @analysis.results_set << :success
     end
   end
 
@@ -32,13 +32,13 @@ describe ImageAnalysis do
     expect(image_analysis.presenter_service).to eq(TestPresenter)
     expect(image_analysis.image_file_paths).to eq([])
     expect(image_analysis.analyzed_images).to eq([])
-    expect(image_analysis.output_rows).to eq([])
+    expect(image_analysis.results_set).to eq([])
   end
 
   describe "#perform!" do
     example do
       image_analysis.perform!
-      expect(image_analysis.output_rows).to eq [:success]
+      expect(image_analysis.results_set).to eq [:success]
     end
   end
 end

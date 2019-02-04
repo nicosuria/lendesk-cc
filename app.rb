@@ -8,6 +8,7 @@ options = GetoptLong.new(
 )
 
 working_dir = Dir.pwd
+format = "terminal"
 
 options.each do |option, value|
   case option
@@ -15,13 +16,33 @@ options.each do |option, value|
     unless value == ''
       working_dir = value
     end
+  when '--format'
+    case value
+    when "csv"
+      format = "csv"
+    else
+      raise ArgumentError, "Unrecognized format: #{value.inspect}"
+    end
   else
     raise ArgumentError, "Unrecognized argument: #{option.inspect}"
   end
 end
 
-PresentOnTerminal.(
-  GeoLocateImages.(
-    FindImageFiles.(working_dir)
-  )
+#format_service =  case format
+                  #when 'terminal'
+                    #PresentOnTerminal
+                  #when 'csv'
+                    #PresentAsCSV
+                  #end
+
+image_analysis = ImageAnalysis.new(
+  working_dir,
+  analysis_services: [
+    FindImageFiles,
+    AnalyzeImages,
+    PresentResults
+  ],
+  presenter_service: TerminalPresenter
 )
+
+image_analysis.perform!
