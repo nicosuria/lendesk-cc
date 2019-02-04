@@ -1,4 +1,4 @@
-# Single responsibility object
+# Single responsibility object with a single class method entrypoint but instance-based implementation.
 class Service
   class << self
     def call(*args)
