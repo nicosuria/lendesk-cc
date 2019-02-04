@@ -31,6 +31,7 @@ describe ImageAnalysis do
     expect(image_analysis.analysis_services).to eq([TestService])
     expect(image_analysis.presenter_service).to eq(TestPresenter)
     expect(image_analysis.image_file_paths).to eq([])
+    expect(image_analysis.analyzed_images).to eq([])
     expect(image_analysis.output_rows).to eq([])
   end
 

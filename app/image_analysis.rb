@@ -1,6 +1,6 @@
 class ImageAnalysis
   attr_reader :working_dir, :analysis_services, :presenter_service
-  attr_accessor :image_file_paths, :output_rows
+  attr_accessor :image_file_paths, :analyzed_images, :output_rows
 
   def initialize(working_dir, analysis_services:, presenter_service:)
     @working_dir = working_dir
@@ -8,6 +8,7 @@ class ImageAnalysis
     @presenter_service = presenter_service
 
     @image_file_paths = []
+    @analyzed_images = []
     @output_rows = []
   end
 
