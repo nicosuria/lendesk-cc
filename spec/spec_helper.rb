@@ -100,4 +100,7 @@ RSpec.configure do |config|
 
   # Require Support files
   Dir["./spec/support/**/*.rb"].each {|f| require f}
+
+  # Allow debugging
+  require 'pry'
 end
