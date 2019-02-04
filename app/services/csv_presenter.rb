@@ -17,7 +17,7 @@ class CsvPresenter < PresenterService
   private
 
   def absolute_csv_filepath
-    [Dir.pwd, csv_filename].join('/')
+    [__dir__, csv_filename].join('/')
   end
 
   def csv_filename

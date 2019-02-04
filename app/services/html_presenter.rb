@@ -17,7 +17,7 @@ class HtmlPresenter < PresenterService
   private
 
   def absolute_filepath
-    [Dir.pwd, filename].join('/')
+    [__dir__, filename].join('/')
   end
 
   def filename
@@ -29,6 +29,6 @@ class HtmlPresenter < PresenterService
   end
 
   def template
-    File.read(Dir.pwd + '/app/templates/output.html.erb')
+    File.read(__dir__ + '/templates/output.html.erb')
   end
 end
