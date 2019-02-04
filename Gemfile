@@ -1,5 +1,7 @@
 source "https://rubygems.org"
 
 gem "exifr"
-gem "terminal-table"
+gem "pry"
 gem "rspec"
+gem "terminal-table"
+gem "xmp"

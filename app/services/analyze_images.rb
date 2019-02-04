@@ -1,4 +1,5 @@
 # Service that builds exif data from a collection of image paths.
+#require "xmp"
 require "exifr/jpeg"
 require "ostruct"
 
@@ -16,9 +17,17 @@ class AnalyzeImages < Service
 		image_analysis.analyzed_images = image_analysis.image_file_paths.each_with_index.map do |image_path, i|
 			print "\rProcessing #{i + 1} of #{image_count}"
       print "\n" if (i+1 == image_count)
+
+      analysis = EXIFR::JPEG.new(image_path)
+
+      #if analysis.gps.nil?
+        #xmp = XMP.parse(analysis)
+        #binding.pry
+      #end
+
 			OpenStruct.new({
 				filename: File.basename(image_path),
-				analysis: EXIFR::JPEG.new(image_path)
+				analysis: analysis
 			})
 		end
 	end
