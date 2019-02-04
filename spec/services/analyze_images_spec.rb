@@ -1,10 +1,10 @@
-require "spec_helper"
-
 require_relative "../../app/service"
 require_relative "../../app/image_analysis"
 require_relative "../../app/services/analyze_images"
 
 describe AnalyzeImages do
+  include_context "Suppress STDOUT"
+
   let(:image_analysis) do
     ImageAnalysis.new("/tmp", analysis_services: [], presenter_service: nil)
   end
