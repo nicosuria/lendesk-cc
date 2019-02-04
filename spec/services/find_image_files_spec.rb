@@ -12,7 +12,7 @@ describe FindImageFiles do
   end
 
   subject do
-    described_class.new(image_analysis)
+    described_class.send(:new, image_analysis)
   end
 
   it_behaves_like "a service"

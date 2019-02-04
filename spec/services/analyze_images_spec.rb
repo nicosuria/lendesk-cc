@@ -17,7 +17,7 @@ describe AnalyzeImages do
     ]
   end
 
-  subject { described_class.new(image_analysis) }
+  subject { described_class.send(:new, image_analysis) }
 
   it_behaves_like "a service"
 

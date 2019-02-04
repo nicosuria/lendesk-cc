@@ -30,7 +30,9 @@ describe PresentResults do
 
   before { image_analysis.analyzed_images = [image_one, image_two] }
 
-  subject { described_class.new(image_analysis) }
+  subject do
+    described_class.send(:new, image_analysis)
+  end
 
   it_behaves_like "a service"
 

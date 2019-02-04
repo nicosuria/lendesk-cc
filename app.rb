@@ -1,7 +1,8 @@
+# Load Project files
+Dir[Dir.pwd + "/app/**/*.rb"].each { |project_file| require project_file }
+
 # POSIX-style CLI options
 require 'getoptlong'
-require_relative 'app/service'
-Dir[Dir.pwd + "/app/**/*.rb"].each { |project_file| require project_file }
 
 # Default configuration
 working_dir = Dir.pwd

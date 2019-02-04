@@ -6,7 +6,7 @@ class Service
     end
   end
 
-  private_class_method :initialize
+  private_class_method :new
 
   # Abstract
   def call
