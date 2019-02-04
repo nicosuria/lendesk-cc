@@ -16,19 +16,13 @@ rbenv install 2.5.3
 rvm install 2.5.3
 ```
 
-2. Unzip the directory and go into the project directory.
-
-```bash
-unzip -a lendesk-cc.zipp ; cd lendesk-cc
-```
-
-3. Install bundler and bundled gems.
+2. Install bundler and bundled gems.
 
 ```bash
 gem install bundler ; bundle install
 ```
 
-4. You should be good to go! Use the following command run your first analysis.
+4. You should be good to go! Use the following command to run your first analysis.
 
 ```bash
 ruby app.rb
