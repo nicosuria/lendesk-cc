@@ -35,8 +35,8 @@ class PresentResults < Service
     image_analysis.analyzed_images.map do |image|
       [
         image.filename,
-        image.analysis.gps_latitude,
-        image.analysis.gps_longitude,
+        image.analysis.gps&.latitude,
+        image.analysis.gps&.longitude,
       ]
     end
   end

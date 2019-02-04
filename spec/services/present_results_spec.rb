@@ -14,16 +14,14 @@ describe PresentResults do
   let(:image_one) do
     double(:analyzed_image, filename: "img1.jpg",
            analysis: double(:exif_jpg,
-                            gps_latitude: :latitude_one,
-                            gps_longitude: :longitude_one
+                            gps: double(:gps, latitude: :latitude_one, longitude: :longitude_one)
                            ))
   end
 
   let(:image_two) do
     double(:analyzed_image, filename: "img2.jpg",
            analysis: double(:exif_jpg,
-                            gps_latitude: :latitude_two,
-                            gps_longitude: :longitude_two
+                            gps: double(:gps, latitude: :latitude_two, longitude: :longitude_two)
                            ))
   end
 
