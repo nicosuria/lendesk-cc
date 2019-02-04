@@ -23,6 +23,8 @@ options.each do |option, value|
     case value
     when "csv"
       presenter_service = CsvPresenter
+    when "html"
+      presenter_service = HtmlPresenter
     else
       raise ArgumentError, "Unrecognized format: #{value.inspect}"
     end
