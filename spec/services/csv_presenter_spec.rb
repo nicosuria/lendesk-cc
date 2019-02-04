@@ -1,6 +1,7 @@
 require_relative "../../app/service"
 require_relative "../../app/presenter_service"
 require_relative "../../app/services/csv_presenter"
+require 'csv'
 
 describe CsvPresenter do
   include_context "Suppress STDOUT"
@@ -21,22 +22,26 @@ describe CsvPresenter do
   end
 
   describe "#call" do
-    let(:expected_filename) do
-      allow(Time).to receive(:now).and_return(Time.new(1986,4,28,14,6))
-      "tmp/output/19860428140600-image-analysis.csv"
+    let(:random_timestamp) do
+      Time.at(rand * Time.now.to_i)
     end
 
-    let(:csv_proxy) do
-      double :csv
+    before do
+      allow(Time).to receive(:now).and_return(random_timestamp)
     end
+
+    let(:expected_filename) do
+      Dir.pwd + "/tmp/output/#{random_timestamp.strftime('%Y%m%d%H%M%S')}-image-analysis.csv"
+    end
+
 
     it "builds a CSV" do
-      expect(CSV).to receive(:open).with(expected_filename, "wb").and_yield(csv_proxy)
-      expect(csv_proxy).to receive(:"<<").with(["Song", "Artist"])
-      expect(csv_proxy).to receive(:"<<").with(["41", "Dave Matthews Band"])
-      expect(csv_proxy).to receive(:"<<").with(["Hurt", "Johnny Cash"])
-
       subject.call
+      csv_results = CSV.read(expected_filename)
+
+      expect(csv_results[0]).to eq headings
+      expect(csv_results[1]).to eq rows[0]
+      expect(csv_results[2]).to eq rows[1]
     end
   end
 end
