@@ -17,7 +17,7 @@ class HtmlPresenter < PresenterService
   private
 
   def absolute_filepath
-    [__dir__, filename].join('/')
+    [Dir.pwd, filename].join('/')
   end
 
   def filename
